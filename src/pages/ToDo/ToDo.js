@@ -1,18 +1,46 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const ToDo = () => {
-    const [todo, myTodo] = useState()
-    // useEffect(()=>{
-    //     fetch(`http://localhost:5000/tasks?email=`)
-    // },[])
+    const [user, loading, error] = useAuthState(auth);
+    const [todo, myTodo] = useState([])
+    useEffect(() => {
+        const email = user?.email
+        fetch(`http://localhost:5000/tasks?email=${email}`)
+            .then(res => res.json())
+            .then(data => myTodo(data))
+    }, [user])
+    const handleDelete = (id) => {
+        const proceed = window.confirm("Are you sure?")
+        if (proceed) {
+            fetch(`http://localhost:5000/tasks/${id}`, {
+                method: "DELETE",
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = todo.filter(task => task._id !== id)
+                    myTodo(remaining)
+                })
+        }
+
+    }
+
+    const handleCompleted = (id) => {
+        const url = `http://localhost:5000/tasks/${id}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+    }
     return (
-        <div>
-            <h2 className='text-primary text-4xl font-bold text-center py-5'>You have added the following todo lists</h2>
+        <div className='px-12'>
+            <h2 className='text-primary text-4xl font-bold text-center py-5'>You have added the following todo lists : {todo?.length}</h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Task</th>
                             <th>Description</th>
                             <th>Complete ?</th>
@@ -20,13 +48,14 @@ const ToDo = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td><button className='btn btn-primary text-white'>Completed</button></td>
-                            <td><button className='btn btn-primary text-white'>Delete</button></td>
-                        </tr>
+                        {
+                            todo.map(task => <tr>
+                                <td>{task.title}</td>
+                                <td>{task.description}</td>
+                                <td><button onClick={() => handleCompleted(task._id)} className='btn btn-primary text-white'>Completed</button></td>
+                                <td><button onClick={() => handleDelete(task._id)} className='btn btn-primary text-white'>Delete</button></td>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>
