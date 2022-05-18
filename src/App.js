@@ -6,6 +6,7 @@ import Login from './pages/Shared.js/Login';
 import Navbar from './pages/Shared.js/Navbar';
 import RequireAuth from './pages/Shared.js/RequireAuth';
 import SignUp from './pages/Shared.js/SignUp';
+import CreateToDoList from './pages/ToDo/CreateToDoList';
 import ToDo from './pages/ToDo/ToDo';
 
 function App() {
@@ -17,6 +18,11 @@ function App() {
         <Route path="/todo" element={
           <RequireAuth>
             <ToDo></ToDo>
+          </RequireAuth>
+        }></Route>
+        <Route path="/createlist" element={
+          <RequireAuth>
+            <CreateToDoList></CreateToDoList>
           </RequireAuth>
         }></Route>
         <Route path="/login" element={<Login></Login>}></Route>

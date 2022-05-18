@@ -28,19 +28,19 @@ const SignUp = () => {
 
     return (
         <div>
-            <div class="card w-96 bg-base-100 shadow-xl mx-auto">
-                <div class="card-body">
-                    <h2 class="card-title">Sign Up</h2>
+            <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+                <div className="card-body">
+                    <h2 className="card-title">Sign Up</h2>
                     <form onSubmit={handleSignUp}>
-                        <input type="text" placeholder="Your Name" class="input input-bordered w-full max-w-xs mt-2" />
-                        <input type="email" placeholder="Your Email" name='email' class="input input-bordered w-full max-w-xs mt-2" />
-                        <input type="password" placeholder="Password" name='password' class="input input-bordered w-full max-w-xs mt-2" />
-                        <input type="password" placeholder="confirm-password" name='confirmPassword' class="input input-bordered w-full max-w-xs mt-2" />
+                        <input type="text" placeholder="Your Name" className="input input-bordered w-full max-w-xs mt-2" />
+                        <input type="email" placeholder="Your Email" name='email' className="input input-bordered w-full max-w-xs mt-2" />
+                        <input type="password" placeholder="Password" name='password' className="input input-bordered w-full max-w-xs mt-2" />
+                        <input type="password" placeholder="confirm-password" name='confirmPassword' className="input input-bordered w-full max-w-xs mt-2" />
                         <input className='btn btn-primary w-full mt-2' type="submit" value="Sign Up" />
                     </form>
                     <small className='flex justify-between'><p>Already have an account? <Link to="/login" className='text-primary font-bold'> Log In</Link> </p></small>
-                    <div class="divider">OR</div>
-                    <button onClick={() => signInWithGoogle()} class="btn btn-outline btn-accent">Continue With Google</button>
+                    <div className="divider">OR</div>
+                    <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-accent">Continue With Google</button>
 
                 </div>
             </div>

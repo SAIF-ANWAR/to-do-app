@@ -14,7 +14,7 @@ const ToDo = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm("Are you sure?")
         if (proceed) {
-            fetch(`http://localhost:5000/tasks/${id}`, {
+            fetch(`https://powerful-waters-44296.herokuapp.com/tasks/${id}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
@@ -28,7 +28,7 @@ const ToDo = () => {
     }
 
     const handleCompleted = (id) => {
-        const url = `http://localhost:5000/tasks/${id}`
+        const url = `https://powerful-waters-44296.herokuapp.com/tasks/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => console.log(data))
@@ -37,8 +37,8 @@ const ToDo = () => {
     return (
         <div className='px-12'>
             <h2 className='text-primary text-4xl font-bold text-center py-5'>You have added the following todo lists : {todo?.length}</h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th>Task</th>
