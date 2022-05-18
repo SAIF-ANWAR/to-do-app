@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ToDo = () => {
+    const [todo, myTodo] = useState()
+    // useEffect(()=>{
+    //     fetch(`http://localhost:5000/tasks?email=`)
+    // },[])
     return (
         <div>
             <h2 className='text-primary text-4xl font-bold text-center py-5'>You have added the following todo lists</h2>
